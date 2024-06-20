@@ -30,6 +30,7 @@ def DoRetrieval(device, net, Img_dir, Gallery_dir, Query_dir, NB_CLS, Top_N, arg
     Query_loader = T.utils.data.DataLoader(Query_set, batch_size=args.batch_size, num_workers=args.num_workers)
 
     Crop_Normalize = T.nn.Sequential(
+        Kg.Resize((256,256)), #If the image size is not 256 * 256, resize it to 256 * 256
         Kg.CenterCrop(224),
         Kg.Normalize(mean=T.as_tensor([0.485, 0.456, 0.406]), std=T.as_tensor([0.229, 0.224, 0.225]))
     )
